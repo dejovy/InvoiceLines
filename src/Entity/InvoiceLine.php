@@ -14,7 +14,7 @@ class InvoiceLine
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'invoiceLine', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'invoiceLine',cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Invoice $invoice = null;
 
@@ -43,7 +43,7 @@ class InvoiceLine
         return $this->invoice;
     }
 
-    public function setInvoice(Invoice $invoice): static
+    public function setInvoice(?Invoice $invoice): static
     {
         $this->invoice = $invoice;
 

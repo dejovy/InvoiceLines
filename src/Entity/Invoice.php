@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,8 +25,13 @@ class Invoice
     #[ORM\Column]
     private ?int $customerId = null;
 
-    #[ORM\OneToOne(mappedBy: 'invoice', cascade: ['persist', 'remove'])]
-    private ?InvoiceLine $invoiceLine = null;
+    #[ORM\OneToMany(targetEntity:'InvoiceLine',mappedBy: 'invoice', cascade: ['persist', 'remove'])]
+    private  $invoiceLines;
+
+    public function __construct()
+    {
+        $this->invoiceLines = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -67,20 +74,31 @@ class Invoice
         return $this;
     }
 
-    public function getInvoiceLine(): ?InvoiceLine
+    public function getInvoiceLines(): Collection
     {
-        return $this->invoiceLine;
+        return $this->invoiceLines;
     }
 
-    public function setInvoiceLine(InvoiceLine $invoiceLine): static
+    public function addInvoiceLine(InvoiceLine $invoiceLine): self
     {
-        // set the owning side of the relation if necessary
-        if ($invoiceLine->getInvoice() !== $this) {
+        if (!$this->invoiceLines->contains($invoiceLine)) {
+            $this->invoiceLines[] = $invoiceLine;
             $invoiceLine->setInvoice($this);
         }
 
-        $this->invoiceLine = $invoiceLine;
+        return $this;
+    }
+
+    public function removeInvoiceLine(InvoiceLine $invoiceLine): self
+    {
+        if ($this->invoiceLines->removeElement($invoiceLine)) {
+            // set the owning side to null (unless already changed)
+            if ($invoiceLine->getInvoice() === $this) {
+                $invoiceLine->setInvoice(null);
+            }
+        }
 
         return $this;
     }
+
 }
