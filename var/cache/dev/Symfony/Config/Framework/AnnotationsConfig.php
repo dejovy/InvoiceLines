@@ -30,7 +30,7 @@ class AnnotationsConfig
     }
 
     /**
-     * @default 'none'
+     * @default 'php_array'
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
