@@ -36,6 +36,11 @@ class InvoiceType extends AbstractType
                 'entry_type' => InvoiceLineType::class,
                 'allow_add' => true, // Allow adding new invoice lines dynamically
                 'by_reference' => false, // Set this to false to handle InvoiceLines as objects
+                 'allow_delete' => true,
+                 'attr' => [
+                    'data-entry-add-label' => 'Add Invoice Line',
+                    'data-entry-remove-label' => 'Rm Invoice Line',
+                  ],
             ]);
     }
 

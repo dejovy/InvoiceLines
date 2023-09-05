@@ -149,10 +149,11 @@ class __TwigTemplate_15b0521370bae13622be3d16a71d619c extends Template
         echo "                    ";
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 47, $this->source); })()), 'form');
         echo "
+
+
                 </div>
                 <div class=\"modal-footer\">
                     <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                    <button type=\"submit\" class=\"btn btn-primary\">Add</button>
                 </div>
             </div>
         </div>
@@ -232,10 +233,11 @@ class __TwigTemplate_15b0521370bae13622be3d16a71d619c extends Template
                 <div class=\"modal-body\">
                     {# Include your Symfony form for adding invoices here #}
                     {{ form(form) }}
+
+
                 </div>
                 <div class=\"modal-footer\">
                     <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-                    <button type=\"submit\" class=\"btn btn-primary\">Add</button>
                 </div>
             </div>
         </div>
